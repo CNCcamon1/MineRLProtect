@@ -1,0 +1,35 @@
+Purpose: To create a MineRL Agent which can protect and aid a human-controlled player.
+
+Terms:
+    - HP: Human-Player. The other player in the world, controlled by a human, which must be protected
+    - CP: Computer-Player. The player controlled by the neural network
+    - CP-Net: The neural network which controls CP
+
+Goals:
+
+    1. Gather resources for HP
+
+    2. Build structures for HP
+
+    3. Protect human-player in combat situations
+
+Reward sources:
+    - HP surviving for X seconds
+    - HP gaining valuable items
+
+Punishment sources:
+    - HP dies
+    - HP is trapped
+    - HP sends an override command
+
+Implementation:
+    - By default, CP-Net will attempt to protect HP from harm and collect valuable resources for HP
+    - HP can send override commands to CP-Net which will override its current behavior
+
+Phases:
+    1. Basic functionality
+    2. Self-survival without hostile mobs
+    3. Self-survival with hostile mobs
+    4. Protect a stationary HP
+    5. Protect a moving HP
+    6. Protect an HP taking complex actions
