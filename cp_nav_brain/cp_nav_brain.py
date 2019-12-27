@@ -3,8 +3,9 @@ import minerl
 import numpy as np
 import math
 import random
+from cp_nav_table import NavTable
 
-class CpBrain:
+class CpNavBrain:
 
     #Initializes CP's brain
     def __init__(self, env):
@@ -23,28 +24,27 @@ class CpBrain:
 
     #Executes a single episode
     def execute_episode(self):
+        #Restart the env
         state = self.env.reset()
-
         epochs, penalties, reward, = 0, 0, 0
+        nav_table = NavTable()
         done = False
         
         while not done:
+            learned_action = nav_table.get_action_by_state(state)
             if random.uniform(0, 1) < self.epsilon:
-                action = self.env.action_space.sample() # Explore action space
+                action = self.env.action_space.sample()
+            elif (learned_action):
+                action = learned_action
             else:
-                action = np.argmax(self.q_table[state]) # Exploit learned values
-
+                action = self.env.action_space.sample()
+            
+            #Perform the action
             next_state, reward, done, info = self.env.step(action) 
-            
-            old_value = self.q_table[state, action]
-            next_max = np.max(self.q_table[next_state])
-            
-            new_value = (1 - self.alpha) * old_value + self.alpha * (reward + self.gamma * next_max)
-            self.q_table[state, action] = new_value
 
-            if reward == -10:
-                penalties += 1
+            nav_table.insert_node(state, action, next_state, 50.0)
 
-            state = next_state
-            epochs += 1
+            
+
+
             

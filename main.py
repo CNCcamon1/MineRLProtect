@@ -3,7 +3,7 @@ import minerl
 import logging
 import random
 import numpy as np
-from cp_brain.cp_brain import CpBrain
+from cp_nav_brain.cp_nav_brain import CpNavBrain
 from taxi_brain.taxi_brain import TaxiBrain
 
 MINERL_DATA_ROOT = "/e/Documents/Programming/MineRLProtect/data"
@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 def run_minerl():
     env = gym.make("MineRLNavigate-v0")
-    player_brain = CpBrain(env)
+    player_brain = CpNavBrain(env)
     player_brain.execute_episode()
 
 def run_taxi():
@@ -43,5 +43,5 @@ def train_from_data():
         print(done[-1])
 
 if __name__=='__main__':
-    run_taxi()
-    #train_from_data()
+    #run_taxi()
+    run_minerl()

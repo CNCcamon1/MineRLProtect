@@ -25,9 +25,6 @@ class TaxiBrain:
     def execute_episode(self):
         
         state = self.env.reset()
-        print(state)
-        print(type(state))
-
         epochs, penalties, reward, = 0, 0, 0
         done = False
         
