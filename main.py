@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.DEBUG)
 #minerl.data.download(directory=MINERL_DATA_ROOT, experiment='MineRLNavigate-v0')
 
 def run_minerl():
-    env = gym.make("MineRLNavigate-v0")
+    env = gym.make("MineRLNavigateDense-v0")
     player_brain = CpNavBrain(env)
     player_brain.execute_episode()
 
